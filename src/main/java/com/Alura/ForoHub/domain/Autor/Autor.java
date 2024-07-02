@@ -24,4 +24,12 @@ public class Autor {
     private Perfil perfil;
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Topico> topicos;
+
+    public Autor(Autor autor) {
+        this.id= autor.id;
+        this.nombre= autor.nombre;
+        this.email=autor.email;
+        this.perfil= autor.perfil;
+
+    }
 }

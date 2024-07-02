@@ -28,4 +28,27 @@ public class Topico {
     @ManyToOne
     private Curso curso;
 
+    public Topico(DatosRegistroTopico datos) {
+        this.titulo= datos.titulo();
+        this.mensaje= datos.mensaje();
+        this.fechaCreacion= datos.fechaCreacion();
+        this.estado= datos.estado();
+        this.autor= new Autor(datos.autor());
+        this.curso= new Curso(datos.curso());
+    }
+
+
+    public void actualizarDatos(DatosActualizarTopico datos) {
+        if (datos.titulo()!=null){
+            this.titulo=datos.titulo();
+        }
+
+        if (datos.mensaje()!=null){
+            this.mensaje=datos.mensaje();
+        }
+
+        if (datos.estado()!=null){
+            this.estado=datos.estado();
+        }
+    }
 }

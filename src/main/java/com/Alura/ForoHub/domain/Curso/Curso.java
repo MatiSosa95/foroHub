@@ -20,4 +20,10 @@ public class Curso {
     private Categoria categoria;
     @OneToMany
     private Topico topico;
+
+    public Curso(Curso curso) {
+        this.id= curso.id;
+        this.nombre= curso.nombre;
+        this.categoria= curso.categoria;
+    }
 }
