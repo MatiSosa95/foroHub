@@ -25,7 +25,7 @@ public class Topico {
     private Estado estado;
     @ManyToOne
     private Autor autor;
-    @ManyToOne
+    @Embedded
     private Curso curso;
 
     public Topico(DatosRegistroTopico datos) {

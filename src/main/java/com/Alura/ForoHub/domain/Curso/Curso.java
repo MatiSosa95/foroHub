@@ -18,8 +18,6 @@ public class Curso {
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-    @OneToMany
-    private Topico topico;
 
     public Curso(Curso curso) {
         this.id= curso.id;
