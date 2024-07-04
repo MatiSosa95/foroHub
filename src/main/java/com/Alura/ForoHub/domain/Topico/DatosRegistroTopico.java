@@ -1,7 +1,6 @@
 package com.Alura.ForoHub.domain.Topico;
 
 import com.Alura.ForoHub.domain.Autor.Autor;
-import com.Alura.ForoHub.domain.Curso.Curso;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,5 +11,5 @@ public record DatosRegistroTopico(@NotBlank(message = "Titulo Obligatorio") Stri
                                   String mensaje,
                                   @NotNull Estado estado,
                                   @NotNull @Valid Autor autor,
-                                  @NotNull @Valid Curso curso) {
+                                  @NotBlank String curso) {
 }

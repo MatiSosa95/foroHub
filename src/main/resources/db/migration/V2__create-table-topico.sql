@@ -3,10 +3,8 @@ create table topicos(
     autor_id bigint not null,
     titulo varchar(100) not null,
     mensaje varchar(500) not null,
-    fechaCreacion dateTime not null,
     estado varchar(100) not null,
-    nombre varchar(100) not null,
-    categoria varchar(100) not null,
+    curso varchar(100) not null,
 
     primary key(id),
 

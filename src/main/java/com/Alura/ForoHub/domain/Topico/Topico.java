@@ -1,7 +1,6 @@
 package com.Alura.ForoHub.domain.Topico;
 
 import com.Alura.ForoHub.domain.Autor.Autor;
-import com.Alura.ForoHub.domain.Curso.Curso;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,11 +22,10 @@ public class Topico {
     private LocalDateTime fechaCreacion;
     @Enumerated(EnumType.STRING)
     private Estado estado;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Autor autor;
-    @Embedded
-    private Curso curso;
+    private String curso;
 
     public Topico(DatosRegistroTopico datos) {
         this.titulo= datos.titulo();
@@ -35,7 +33,7 @@ public class Topico {
         this.fechaCreacion= LocalDateTime.now();
         this.estado= datos.estado();
         this.autor= new Autor(datos.autor());
-        this.curso= new Curso(datos.curso());
+        this.curso= datos.curso();
     }
 
 

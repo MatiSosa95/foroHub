@@ -1,6 +1,7 @@
 package com.Alura.ForoHub.Controller;
 
 import com.Alura.ForoHub.Repository.TopicoRepository;
+import com.Alura.ForoHub.domain.Autor.Autor;
 import com.Alura.ForoHub.domain.Topico.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -23,10 +24,11 @@ public class TopicoController {
 
     //REGISTRO DE TOPICO EN BASE DE DATOS
     @PostMapping
+    @Transactional
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datos ){
         Topico topico= repository.save(new Topico(datos));
 
-        DatosRespuestaTopico respuestaTopico= new DatosRespuestaTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(),
+        DatosRespuestaTopico respuestaTopico= new DatosRespuestaTopico(topico.getTitulo(), topico.getMensaje(),
                 topico.getFechaCreacion(),topico.getEstado(),topico.getAutor(), topico.getCurso());
         URI url= UriComponentsBuilder.fromPath("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(respuestaTopico);
@@ -51,10 +53,12 @@ public class TopicoController {
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaTopico> datosTopico(@PathVariable Long id){
         Topico topico= repository.getReferenceById(id);
-
-        var datosTopico= new DatosRespuestaTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(),
-                topico.getFechaCreacion(), topico.getEstado(), topico.getAutor(), topico.getCurso());
+        
+        var datosTopico= new DatosRespuestaTopico(topico.getTitulo(), topico.getMensaje(),
+                   topico.getFechaCreacion(), topico.getEstado(), new Autor(topico.getAutor().getNombre(), topico.getAutor().getEmail()),
+                topico.getCurso());
         return ResponseEntity.ok(datosTopico);
+
     }
 
     //ACTUALIZAR UN TOPICO
@@ -64,7 +68,7 @@ public class TopicoController {
         Topico topico= repository.getReferenceById(id);
         topico.actualizarDatos(datos);
 
-        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(),
+        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getTitulo(), topico.getMensaje(),
                 topico.getFechaCreacion(), topico.getEstado(), topico.getAutor(), topico.getCurso()));
 
     }
