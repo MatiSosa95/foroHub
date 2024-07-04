@@ -7,8 +7,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Table(name = "topico")
 @Entity(name = "Topico")
+@Table(name = "topicos")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +24,7 @@ public class Topico {
     @Enumerated(EnumType.STRING)
     private Estado estado;
     @ManyToOne
+    @JoinColumn(name = "autor_id")
     private Autor autor;
     @Embedded
     private Curso curso;
@@ -31,7 +32,7 @@ public class Topico {
     public Topico(DatosRegistroTopico datos) {
         this.titulo= datos.titulo();
         this.mensaje= datos.mensaje();
-        this.fechaCreacion= datos.fechaCreacion();
+        this.fechaCreacion= LocalDateTime.now();
         this.estado= datos.estado();
         this.autor= new Autor(datos.autor());
         this.curso= new Curso(datos.curso());

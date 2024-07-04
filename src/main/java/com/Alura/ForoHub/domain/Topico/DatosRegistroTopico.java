@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 public record DatosRegistroTopico(@NotBlank(message = "Titulo Obligatorio") String titulo,
                                   String mensaje,
-                                  @NotNull LocalDateTime fechaCreacion,
                                   @NotNull Estado estado,
                                   @NotNull @Valid Autor autor,
                                   @NotNull @Valid Curso curso) {

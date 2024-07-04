@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-@Table(name = "autor")
 @Entity(name = "Autor")
+@Table(name = "autores")
 @Getter
 @Setter
 @NoArgsConstructor
