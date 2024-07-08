@@ -3,6 +3,8 @@ package com.Alura.ForoHub.Controller;
 import com.Alura.ForoHub.Repository.TopicoRepository;
 import com.Alura.ForoHub.domain.Autor.Autor;
 import com.Alura.ForoHub.domain.Topico.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired

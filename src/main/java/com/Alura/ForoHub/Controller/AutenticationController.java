@@ -4,6 +4,7 @@ import com.Alura.ForoHub.Infra.Seguridad.DatosJWTToken;
 import com.Alura.ForoHub.Infra.Seguridad.TokenService;
 import com.Alura.ForoHub.domain.Autor.Autor;
 import com.Alura.ForoHub.domain.Autor.DatosAutentificadorAutor;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class AutenticationController {
         Authentication authenticationToken= new UsernamePasswordAuthenticationToken(datos.email(), datos.clave());
         var autorAutentificado= authenticationManager.authenticate(authenticationToken);
         var JWTtoken= tokenService.generarToken((Autor) autorAutentificado.getPrincipal());
+        System.out.println("aqui");
 
         return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
     }
