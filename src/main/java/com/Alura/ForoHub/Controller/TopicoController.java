@@ -33,7 +33,7 @@ public class TopicoController {
         URI url= UriComponentsBuilder.fromPath("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(respuestaTopico);
     }
-
+    //LISTAR TOPICOS
     @GetMapping
     public ResponseEntity<Page<DatosListadoTopico>> listarTopicos(@PageableDefault(size = 10)Pageable page){
         return ResponseEntity.ok(repository.findAll(page).map(DatosListadoTopico::new));
@@ -55,7 +55,7 @@ public class TopicoController {
         Topico topico= repository.getReferenceById(id);
         
         var datosTopico= new DatosRespuestaTopico(topico.getTitulo(), topico.getMensaje(),
-                   topico.getFechaCreacion(), topico.getEstado(), new Autor(topico.getAutor().getNombre(), topico.getAutor().getEmail()),
+                   topico.getFechaCreacion(), topico.getEstado(), new Autor(topico.getAutor().getId(),topico.getAutor().getNombre(), topico.getAutor().getEmail()),
                 topico.getCurso());
         return ResponseEntity.ok(datosTopico);
 
@@ -69,7 +69,7 @@ public class TopicoController {
         topico.actualizarDatos(datos);
 
         return ResponseEntity.ok(new DatosRespuestaTopico(topico.getTitulo(), topico.getMensaje(),
-                topico.getFechaCreacion(), topico.getEstado(), topico.getAutor(), topico.getCurso()));
+                topico.getFechaCreacion(), topico.getEstado(), new Autor(topico.getAutor().getId(),topico.getAutor().getNombre(), topico.getAutor().getEmail()), topico.getCurso()));
 
     }
 
